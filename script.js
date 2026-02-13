@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.appendChild(button);
 
       // NOW attach submit logic (after button exists)
+      preventSamePreferences();
       attachSubmitHandler(form, button);
     });
 
@@ -96,10 +97,66 @@ document.addEventListener("DOMContentLoaded", () => {
   // SUBMIT HANDLER FUNCTION
   // ============================
 
+  function preventSamePreferences() {
+  const firstRadios = document.getElementsByName("first_preference");
+  const secondRadios = document.getElementsByName("second_preference");
+
+  function updateOptions() {
+    let firstValue = null;
+    let secondValue = null;
+
+    firstRadios.forEach(radio => {
+      if (radio.checked) firstValue = radio.value;
+    });
+
+    secondRadios.forEach(radio => {
+      if (radio.checked) secondValue = radio.value;
+    });
+
+    // Enable everything first
+    firstRadios.forEach(radio => radio.disabled = false);
+    secondRadios.forEach(radio => radio.disabled = false);
+
+    // Disable matching opposite option
+    if (firstValue) {
+      secondRadios.forEach(radio => {
+        if (radio.value === firstValue) {
+          radio.disabled = true;
+        }
+      });
+    }
+
+    if (secondValue) {
+      firstRadios.forEach(radio => {
+        if (radio.value === secondValue) {
+          radio.disabled = true;
+        }
+      });
+    }
+  }
+
+  firstRadios.forEach(radio => {
+    radio.addEventListener("change", updateOptions);
+  });
+
+  secondRadios.forEach(radio => {
+    radio.addEventListener("change", updateOptions);
+  });
+}
   function attachSubmitHandler(form, submitBtn) {
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const first = document.querySelector('input[name="first_preference"]:checked');
+      const second = document.querySelector('input[name="second_preference"]:checked');
+
+      if (first && second && first.value === second.value) {
+        alert("First and Second preference cannot be the same.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Application";
+        loader.classList.remove("active");
+        return;
+      }
 
       submitBtn.disabled = true;
       submitBtn.textContent = "Transmitting...";

@@ -356,3 +356,15 @@ form h2::after {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* Disabled radio input */
+input[type="radio"]:disabled {
+  cursor: not-allowed;
+}
+
+/* Grey out the whole label when radio is disabled */
+label:has(input[type="radio"]:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
