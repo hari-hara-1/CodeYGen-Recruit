@@ -80,11 +80,7 @@
           "label": "Have you participated in any of our club events?",
           "name": "participated_in_events",
           "required": true,
-          "options": [
-            "Yes",
-            "No",
-            "Not sure"
-          ]
+          "options": ["Yes", "No", "Not sure"]
         }
       ]
     },
@@ -129,34 +125,6 @@
           "label": "Why do you want to join Code {Y} Gen?",
           "name": "why_join",
           "required": true
-        },
-        {
-          "type": "radio",
-          "label": "How would you describe your current level in coding?",
-          "name": "coding_level",
-          "required": true,
-          "options": [
-            "I have never coded before.",
-            "I know only basic syntax",
-            "I can write small programs",
-            "I have tried building small projects"
-          ]
-        },
-        {
-          "type": "checkbox",
-          "label": "What languages have you actually written code outside mandatory college assignments?",
-          "name": "languages_used",
-          "required": false,
-          "allowOther": true,
-          "options": [
-            "C/C++",
-            "Java",
-            "Python",
-            "JavaScript",
-            "HTML/CSS",
-            "SQL",
-            "None"
-          ]
         },
         {
           "type": "radio",
@@ -212,16 +180,17 @@
       "sectionTitle": "Reflection & Contribution",
       "questions": [
         {
-          "type": "textarea",
-          "label": "What made you apply to this club at this point in your college life?",
-          "name": "why_apply_now",
-          "required": true
-        },
-        {
-          "type": "textarea",
-          "label": "If selected, how do you think you can contribute to the club apart from attending sessions?",
+          "type": "radio",
+          "label": "How many hours can you contribute to this club per week?",
           "name": "contribution_to_club",
-          "required": true
+          "required": true,
+          "options": [
+            "1-2 hours",
+            "3-4 hours",
+            "5-6 hours",
+            "7-8 hours",
+            "8+ hours"
+          ]
         },
         {
           "type": "textarea",
